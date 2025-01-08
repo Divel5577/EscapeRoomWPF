@@ -361,3 +361,20 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Pliki binarne
+*.exe
+*.dll
+*.pdb
+
+# Katalogi buildów
+bin/
+obj/
+
+# Pliki cache
+*.cache
+*.tmp
+*.log
+
+# Pliki wygenerowane przez Visual Studio
+.vs/
