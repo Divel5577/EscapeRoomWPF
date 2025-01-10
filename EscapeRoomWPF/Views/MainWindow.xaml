@@ -5,7 +5,7 @@
         KeyDown="OnKeyDown">
     <Grid>
         <!-- Tło mapy -->
-        <Image Name="RoomBackground" Source="Assets/librarymap.png" Width="500" Height="500" />
+        <Image Name="RoomBackground" Source="Assets/Images/librarymap.png" Width="500" Height="500" />
 
         <!-- Mapa pokoju -->
         <Canvas Name="RoomCanvas" Width="500" Height="500" Background="Transparent" MouseLeftButtonDown="RoomCanvas_MouseLeftButtonDown" />

@@ -18,7 +18,7 @@ namespace EscapeRoomWPF.Models.Items
         public Door() : base() { }
 
         public Door(int positionX, int positionY, string code, GameController controller = null)
-    : base("Drzwi", "Metalowe drzwi z klawiaturą numeryczną. Musisz wpisać kod, aby je otworzyć.", false, positionX, positionY, "Assets/Images/door.jpg")
+    : base("Drzwi", "Metalowe drzwi z klawiaturą numeryczną. Musisz wpisać kod, aby je otworzyć.", false, positionX, positionY, "Assets/Images/door.png")
         {
             Code = code;
             IsOpen = false;

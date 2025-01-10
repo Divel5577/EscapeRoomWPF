@@ -10,7 +10,7 @@ namespace EscapeRoomWPF.Models.Items
         public Bookshelf() : base() { }
 
         public Bookshelf(int positionX, int positionY, Item hiddenItem)
-    : base("Półka", "Wygląda, jakby można ją było przesunąć.", false, positionX, positionY, "Assets/Images/bookshelf.jpg")
+    : base("Półka", "Wygląda, jakby można ją było przesunąć.", false, positionX, positionY, "Assets/Images/bookshelf.png")
         {
             HiddenItem = hiddenItem;
             IsMoved = false;
