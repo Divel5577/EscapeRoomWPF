@@ -9,7 +9,7 @@ namespace EscapeRoomWPF.Models.Items
         public Painting() : base() { }
 
         public Painting(int positionX, int positionY)
-    : base("Obraz", "Obraz przedstawiający oko. Wygląda, jakby skrywał coś więcej.", false, positionX, positionY, "Assets/Images/painting.jpg")
+    : base("Obraz", "Obraz przedstawiający oko. Wygląda, jakby skrywał coś więcej.", false, positionX, positionY, "Assets/Images/painting.png")
         {
             isKeyholeVisible = false;
 

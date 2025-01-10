@@ -134,7 +134,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Assets\librarymap.png" />
+    <Resource Include="Views\Assets\Images\librarymap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\door.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\bookshelf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\chandelier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\cobweb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\desk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\journal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\painting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\player.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

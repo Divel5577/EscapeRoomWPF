@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using EscapeRoomWPF.Models;
-using EscapeRoomWPF.Controllers;
 using EscapeRoomWPF.Models.Items;
+using EscapeRoomWPF.Controllers;
 using System.Linq;
 using System.Windows.Controls;
 using System;
@@ -20,15 +20,14 @@ namespace EscapeRoomWPF.Views
             // Inicjalizacja gry
             var player = new Player(0, 0);
             var room = new Room(10, 10); // Tworzenie pokoju o wymiarach 10x10
-            room.AddItem(new Door(5, 5, "1234") { IsExit = true });
-            room.AddItem(new Desk(4, 4));
-            room.AddItem(new Cobweb(2, 2));
-            room.AddItem(new Chandelier(6, 1));
+            room.AddItem(new Bookshelf(1, 1, new Models.Items.Key(2, 3)));
+            room.AddItem(new Desk(5, 1));
+            room.AddItem(new Cobweb(9, 9));
+            room.AddItem(new Chandelier(5, 5));
+            room.AddItem(new Door(9, 5, "1234") { IsExit = true }); // Drzwi wyjściowe
+            room.AddItem(new Painting(0, 5));
 
             var gameMap = new GameMap(player, room);
-
-            // Dodajemy drzwi jako wyjście
-            gameMap.CurrentRoom.AddItem(new Door(5, 5, "1234") { IsExit = true });
 
             gameController = new GameController(gameMap, player);
 
@@ -61,14 +60,13 @@ namespace EscapeRoomWPF.Views
             {
                 Width = 50,
                 Height = 50,
-                Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("Assets/player.png", UriKind.Relative))
+                Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("Assets/Images/player.png", UriKind.Relative))
             };
 
             Canvas.SetLeft(playerImage, gameController.Player.PositionX * 50);
             Canvas.SetTop(playerImage, gameController.Player.PositionY * 50);
             RoomCanvas.Children.Add(playerImage);
         }
-
 
 
         private void UpdatePlayerStatus()
