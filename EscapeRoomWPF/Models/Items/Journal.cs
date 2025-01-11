@@ -26,6 +26,7 @@ namespace EscapeRoomWPF.Models.Items
         {
             if (interaction == "Przeczytaj")
             {
+                MessageBox.Show(Content);
             }
             else
             {

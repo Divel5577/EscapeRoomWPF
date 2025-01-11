@@ -33,20 +33,25 @@ namespace EscapeRoomWPF.Models.Items
         {
             if (interaction == "Zbierz")
             {
-                if (inventory.HasItem("Klucz"))
+                if (!inventory.HasItem("Klucz"))
                 {
+                    inventory.AddItem(this);
+                    MessageBox.Show("Podniosłeś klucz.");
                 }
                 else
                 {
-                    inventory.AddItem(this);
+                    MessageBox.Show("Już masz ten klucz.");
                 }
             }
             else if (interaction == "Oglądaj")
             {
+                MessageBox.Show("To mały mosiężny klucz. Może pasować do zamka.");
             }
             else
             {
+                base.OnInteract(interaction, inventory);
             }
         }
+
     }
 }

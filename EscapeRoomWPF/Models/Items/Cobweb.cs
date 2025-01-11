@@ -20,11 +20,13 @@ namespace EscapeRoomWPF.Models.Items
         {
             if (interaction == "Oglądaj")
             {
+                MessageBox.Show("Pajęczyna jest pełna kurzu i pająków. Nic tu nie znajdziesz.");
             }
             else
             {
                 base.OnInteract(interaction, inventory);
             }
         }
+
     }
 }

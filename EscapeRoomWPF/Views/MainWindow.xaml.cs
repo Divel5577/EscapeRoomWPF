@@ -141,11 +141,32 @@ namespace EscapeRoomWPF.Views
             var selectedInteraction = InteractionList.SelectedItem?.ToString();
             if (selectedInteraction != null)
             {
-                gameController.InteractWithCurrentItem(selectedInteraction);
-                RenderRoom();
-                UpdatePlayerStatus();
+                // Znajdź przedmiot w aktualnej pozycji gracza
+                var currentItem = gameController.GameMap.CurrentRoom.GetItemAtPosition(
+                    gameController.Player.PositionX,
+                    gameController.Player.PositionY
+                );
+
+                if (currentItem != null)
+                {
+                    // Wywołaj interakcję dla wybranego przedmiotu
+                    currentItem.OnInteract(selectedInteraction, gameController.Player.Inventory);
+
+                    // Zaktualizuj widok mapy i ekwipunku
+                    RenderRoom();
+                    UpdatePlayerStatus();
+                }
+                else
+                {
+                    MessageBox.Show("Nie znaleziono przedmiotu do interakcji.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrano interakcji.");
             }
         }
+
 
         private void OnExitClick(object sender, RoutedEventArgs e)
         {

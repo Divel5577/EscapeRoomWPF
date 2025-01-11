@@ -36,9 +36,11 @@ namespace EscapeRoomWPF.Models.Items
             {
                 IsMoved = true;
                 inventory.AddItem(HiddenItem);
+                MessageBox.Show("Przesunąłeś półkę i znalazłeś ukryty przedmiot!");
             }
             else if (interaction == "Przesuń" && IsMoved)
             {
+                MessageBox.Show("Półka została już przesunięta.");
             }
             else
             {
