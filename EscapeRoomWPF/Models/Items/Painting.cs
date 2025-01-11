@@ -46,9 +46,11 @@ namespace EscapeRoomWPF.Models.Items
             {
                 if (isKeyholeVisible)
                 {
+                    MessageBox.Show("Widzisz otwór na klucz za obrazem.");
                 }
                 else
                 {
+                    MessageBox.Show("Obraz przedstawia tajemnicze oko.");
                 }
             }
             else if (interaction == "Użyj klucza")
@@ -56,14 +58,18 @@ namespace EscapeRoomWPF.Models.Items
                 if (inventory.HasItem("Klucz"))
                 {
                     isKeyholeVisible = true;
+                    MessageBox.Show("Użyłeś klucza i odsłoniłeś kod do drzwi: 1234.");
                 }
                 else
                 {
+                    MessageBox.Show("Nie masz klucza, aby coś zrobić.");
                 }
             }
             else
             {
+                base.OnInteract(interaction, inventory);
             }
         }
+
     }
 }

@@ -22,7 +22,9 @@ namespace EscapeRoomWPF.Models.Items
         {
             if (interaction == "Przeszukaj")
             {
-                inventory.AddItem(new Journal(PositionX, PositionY));
+                var journal = new Journal(PositionX, PositionY);
+                inventory.AddItem(journal);
+                MessageBox.Show("Przeszukując biurko, znajdujesz stary dziennik.");
             }
             else
             {

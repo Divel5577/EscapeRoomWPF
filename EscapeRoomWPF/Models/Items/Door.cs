@@ -73,6 +73,7 @@ namespace EscapeRoomWPF.Models.Items
                     {
                         IsOpen = true;
                         MessageBox.Show("Drzwi zostały otwarte!");
+                        gameController?.MoveToNextRoom();
                     }
                     else
                     {

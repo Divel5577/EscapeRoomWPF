@@ -20,11 +20,13 @@ namespace EscapeRoomWPF.Models.Items
         {
             if (interaction == "Oglądaj")
             {
+                MessageBox.Show("Żyrandol jest stary i zakurzony. Nic tu nie znajdziesz.");
             }
             else
             {
                 base.OnInteract(interaction, inventory);
             }
         }
+
     }
 }
