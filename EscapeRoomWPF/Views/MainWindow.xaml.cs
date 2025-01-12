@@ -18,9 +18,9 @@ namespace EscapeRoomWPF.Views
             InitializeComponent();
 
             // Inicjalizacja gry
-            var player = new Player(0, 0);
+            var player = new Player(4, 5);
             var room = new Room(10, 10); // Tworzenie pokoju o wymiarach 10x10
-            room.AddItem(new Bookshelf(1, 1, new Models.Items.Key(2, 3)));
+            room.AddItem(new Bookshelf(1, 0, new Models.Items.Key(2, 3)));
             room.AddItem(new Desk(5, 1));
             room.AddItem(new Cobweb(9, 9));
             room.AddItem(new Chandelier(5, 5));
@@ -68,11 +68,17 @@ namespace EscapeRoomWPF.Views
             RoomCanvas.Children.Add(playerImage);
         }
 
-
+        private void UpdateInventoryList()
+        {
+            InventoryList.Items.Clear();
+            foreach (var item in gameController.Player.Inventory.Items)
+            {
+                InventoryList.Items.Add(item.Name);
+            }
+        }
         private void UpdatePlayerStatus()
         {
             PlayerPositionText.Text = $"Pozycja: ({gameController.Player.PositionX}, {gameController.Player.PositionY})";
-            PlayerInventoryText.Text = $"Ekwipunek: {string.Join(", ", gameController.Player.Inventory.Items.Select(i => i.Name))}";
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -147,6 +153,20 @@ namespace EscapeRoomWPF.Views
                     gameController.Player.PositionY
                 );
 
+                // Znajdź wybrany przedmiot w ekwipunku lub na mapie
+                var selectedItemName = InventoryList.SelectedItem?.ToString();
+                if (selectedItemName != null)
+                {
+                    currentItem = gameController.Player.Inventory.Items.FirstOrDefault(i => i.Name == selectedItemName);
+                }
+                else
+                {
+                    currentItem = gameController.GameMap.CurrentRoom.GetItemAtPosition(
+                        gameController.Player.PositionX,
+                        gameController.Player.PositionY
+                    );
+                }
+
                 if (currentItem != null)
                 {
                     // Wywołaj interakcję dla wybranego przedmiotu
@@ -166,6 +186,39 @@ namespace EscapeRoomWPF.Views
                 MessageBox.Show("Nie wybrano interakcji.");
             }
         }
+
+        private void OnInventoryInteractClick(object sender, RoutedEventArgs e)
+        {
+            // Pobierz nazwę wybranego przedmiotu w ekwipunku
+            var selectedItemName = InventoryList.SelectedItem?.ToString();
+
+            if (selectedItemName != null)
+            {
+                // Znajdź przedmiot w ekwipunku gracza
+                var selectedItem = gameController.Player.Inventory.Items.FirstOrDefault(i => i.Name == selectedItemName);
+
+                if (selectedItem != null)
+                {
+                    // Wyświetl dostępne interakcje dla wybranego przedmiotu
+                    InteractionList.Items.Clear();
+                    foreach (var interaction in selectedItem.Interactions.Keys)
+                    {
+                        InteractionList.Items.Add(interaction);
+                    }
+
+                    MessageBox.Show($"Wybrano przedmiot: {selectedItem.Name} ({selectedItem.Description})");
+                }
+                else
+                {
+                    MessageBox.Show("Nie znaleziono przedmiotu w ekwipunku.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrano przedmiotu z ekwipunku.");
+            }
+        }
+
 
 
         private void OnExitClick(object sender, RoutedEventArgs e)

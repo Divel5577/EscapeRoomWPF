@@ -11,10 +11,17 @@
         <Canvas Name="RoomCanvas" Width="500" Height="500" Background="Transparent" MouseLeftButtonDown="RoomCanvas_MouseLeftButtonDown" />
 
         <!-- Panel interakcji -->
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10">
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
             <TextBlock Text="Interakcje:" FontWeight="Bold" FontSize="16" />
             <ListBox Name="InteractionList" Width="200" Height="400" />
             <Button Name="InteractButton" Content="Wykonaj" Width="200" Height="30" Click="OnInteractClick"/>
+        </StackPanel>
+
+        <!-- Panel ekwipunku -->
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10">
+            <TextBlock Text="Ekwipunek:" FontWeight="Bold" FontSize="16" />
+            <ListBox Name="InventoryList" Width="200" Height="400" />
+            <Button Name="InventoryInteractButton" Content="Użyj" Width="200" Height="30" Click="OnInventoryInteractClick"/>
         </StackPanel>
 
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,466,0,0">
@@ -24,7 +31,6 @@
         <!-- Panel statusu gracza -->
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10">
             <TextBlock Name="PlayerPositionText" FontSize="14" />
-            <TextBlock Name="PlayerInventoryText" FontSize="14" />
         </StackPanel>
     </Grid>
 </Window>
