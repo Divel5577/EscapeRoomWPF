@@ -17,8 +17,6 @@ namespace EscapeRoomWPF.Views
 
         public void UpdateStatus(Player player)
         {
-            PlayerPositionText.Text = $"Pozycja: ({player.PositionX}, {player.PositionY})";
-            PlayerInventoryText.Text = $"Ekwipunek: {string.Join(", ", player.Inventory.Items.Select(i => i.Name))}";
-        }
+            PlayerPositionText.Text = $"Pozycja: ({player.PositionX}, {player.PositionY})";        }
     }
 }

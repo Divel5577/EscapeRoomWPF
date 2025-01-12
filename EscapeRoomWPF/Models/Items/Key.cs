@@ -31,17 +31,9 @@ namespace EscapeRoomWPF.Models.Items
 
         public override void OnInteract(string interaction, Inventory inventory)
         {
-            if (interaction == "Zbierz")
+            if (interaction == "Użyj")
             {
-                if (!inventory.HasItem("Klucz"))
-                {
-                    inventory.AddItem(this);
-                    MessageBox.Show("Podniosłeś klucz.");
-                }
-                else
-                {
-                    MessageBox.Show("Już masz ten klucz.");
-                }
+                MessageBox.Show("Użyłeś klucza.");
             }
             else if (interaction == "Oglądaj")
             {
@@ -52,6 +44,7 @@ namespace EscapeRoomWPF.Models.Items
                 base.OnInteract(interaction, inventory);
             }
         }
+
 
     }
 }

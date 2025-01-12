@@ -137,9 +137,6 @@
     <Resource Include="Views\Assets\Images\librarymap.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Assets\Images\door.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Views\Assets\Images\bookshelf.png" />
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +155,13 @@
     <Resource Include="Views\Assets\Images\key.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Assets\Images\painting.png" />
+    <Resource Include="Views\Assets\Images\player.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Assets\Images\player.png" />
+    <Resource Include="Views\Assets\Images\door.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Images\painting.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
