@@ -74,8 +74,6 @@ namespace EscapeRoomWPF.Controllers
             }
         }
 
-
-
         public void InteractWithCurrentItem(string interaction)
         {
             var item = GameMap.CurrentRoom.GetItemAtPosition(Player.PositionX, Player.PositionY);

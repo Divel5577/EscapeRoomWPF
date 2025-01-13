@@ -6,6 +6,7 @@ using EscapeRoomWPF.Controllers;
 using System.Linq;
 using System.Windows.Controls;
 using System;
+using System.Collections.Generic;
 
 namespace EscapeRoomWPF.Views
 {
@@ -81,6 +82,18 @@ namespace EscapeRoomWPF.Views
             PlayerPositionText.Text = $"Pozycja: ({gameController.Player.PositionX}, {gameController.Player.PositionY})";
         }
 
+        private List<Item> GetNearbyItems()
+        {
+            int playerX = gameController.Player.PositionX;
+            int playerY = gameController.Player.PositionY;
+
+            // Pobierz przedmioty w otoczeniu gracza
+            return gameController.GameMap.CurrentRoom.Items.Where(item =>
+                Math.Abs(item.PositionX - playerX) <= 1 &&
+                Math.Abs(item.PositionY - playerY) <= 1
+            ).ToList();
+        }
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -111,35 +124,25 @@ namespace EscapeRoomWPF.Views
             int clickedX = (int)(clickPosition.X / 50);
             int clickedY = (int)(clickPosition.Y / 50);
 
-            var item = gameController.GameMap.CurrentRoom.GetItemAtPosition(clickedX, clickedY);
-            if (item != null)
+            var nearbyItems = GetNearbyItems();
+            if (nearbyItems.Count > 0)
             {
                 InteractionList.Items.Clear();
-                foreach (var interaction in item.Interactions.Keys)
+                foreach (var item in nearbyItems)
                 {
-                    InteractionList.Items.Add(interaction);
+                    foreach (var interaction in item.Interactions.Keys)
+                    {
+                        InteractionList.Items.Add($"{item.Name}: {interaction}");
+                    }
                 }
-
-                // Podświetlenie wybranego elementu
-                var highlightRectangle = new System.Windows.Shapes.Rectangle
-                {
-                    Width = 50,
-                    Height = 50,
-                    Fill = System.Windows.Media.Brushes.Yellow,
-                    Opacity = 0.5
-                };
-
-                Canvas.SetLeft(highlightRectangle, clickedX * 50);
-                Canvas.SetTop(highlightRectangle, clickedY * 50);
-                RoomCanvas.Children.Add(highlightRectangle);
-
-                MessageBox.Show($"Kliknięto na obiekt: {item.Name} ({item.Description})");
+                MessageBox.Show("Znaleziono przedmiot(y) w otoczeniu. Wybierz interakcję.");
             }
             else
             {
-                MessageBox.Show("Kliknięto na puste pole.");
+                MessageBox.Show("Brak przedmiotów w otoczeniu.");
             }
         }
+
 
 
         private void OnInteractClick(object sender, RoutedEventArgs e)
@@ -147,34 +150,45 @@ namespace EscapeRoomWPF.Views
             var selectedInteraction = InteractionList.SelectedItem?.ToString();
             if (selectedInteraction != null)
             {
-                // Znajdź przedmiot w aktualnej pozycji gracza
-                var currentItem = gameController.GameMap.CurrentRoom.GetItemAtPosition(
-                    gameController.Player.PositionX,
-                    gameController.Player.PositionY
-                );
+                Item currentItem = null;
 
-                // Znajdź wybrany przedmiot w ekwipunku lub na mapie
+                // Sprawdź, czy przedmiot jest wybrany z ekwipunku
                 var selectedItemName = InventoryList.SelectedItem?.ToString();
                 if (selectedItemName != null)
                 {
+                    // Znajdź przedmiot w ekwipunku na podstawie nazwy
                     currentItem = gameController.Player.Inventory.Items.FirstOrDefault(i => i.Name == selectedItemName);
                 }
                 else
                 {
-                    currentItem = gameController.GameMap.CurrentRoom.GetItemAtPosition(
-                        gameController.Player.PositionX,
-                        gameController.Player.PositionY
-                    );
+                    // Jeśli nie wybrano przedmiotu z ekwipunku, znajdź przedmiot w otoczeniu gracza
+                    var parts = selectedInteraction.Split(new[] { ": " }, StringSplitOptions.None);
+                    if (parts.Length == 2)
+                    {
+                        var itemName = parts[0];
+                        var interaction = parts[1];
+
+                        currentItem = GetNearbyItems().FirstOrDefault(i => i.Name == itemName);
+                        selectedInteraction = interaction; // Przypisz tylko nazwę interakcji
+                    }
                 }
 
                 if (currentItem != null)
                 {
-                    // Wywołaj interakcję dla wybranego przedmiotu
-                    currentItem.OnInteract(selectedInteraction, gameController.Player.Inventory);
+                    // Wykonaj interakcję, jeśli przedmiot i interakcja są prawidłowe
+                    if (currentItem.Interactions.ContainsKey(selectedInteraction))
+                    {
+                        currentItem.OnInteract(selectedInteraction, gameController.Player.Inventory);
 
-                    // Zaktualizuj widok mapy i ekwipunku
-                    RenderRoom();
-                    UpdatePlayerStatus();
+                        // Zaktualizuj widok po interakcji
+                        RenderRoom();
+                        UpdatePlayerStatus();
+                        UpdateInventoryList();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Wybrany przedmiot nie obsługuje interakcji '{selectedInteraction}'.");
+                    }
                 }
                 else
                 {
@@ -186,6 +200,9 @@ namespace EscapeRoomWPF.Views
                 MessageBox.Show("Nie wybrano interakcji.");
             }
         }
+
+
+
 
         private void OnInventoryInteractClick(object sender, RoutedEventArgs e)
         {
