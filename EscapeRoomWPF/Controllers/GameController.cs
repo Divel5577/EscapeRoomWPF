@@ -43,29 +43,27 @@ namespace EscapeRoomWPF.Controllers
                 case "down": deltaY = 1; break;
                 case "left": deltaX = -1; break;
                 case "right": deltaX = 1; break;
-                default:
-                    MessageBox.Show("Nieznany kierunek.");
-                    return;
             }
 
-            // Oblicz nową pozycję gracza
             int newX = Player.PositionX + deltaX;
             int newY = Player.PositionY + deltaY;
 
             // Sprawdzenie granic mapy
-            int roomWidth = GameMap.CurrentRoom.Map.GetLength(0);
-            int roomHeight = GameMap.CurrentRoom.Map.GetLength(1);
-
-            if (newX >= 0 && newX < roomWidth && newY >= 0 && newY < roomHeight)
+            if (newX >= 0 && newX < GameMap.CurrentRoom.Map.GetLength(0) &&
+                newY >= 0 && newY < GameMap.CurrentRoom.Map.GetLength(1))
             {
-                Player.Move(deltaX, deltaY); // Wykonaj ruch tylko jeśli jest w granicach
-                RoomUpdated?.Invoke();
-                PlayerStatusUpdated?.Invoke();
-
-                var item = GameMap.CurrentRoom.GetItemAtPosition(Player.PositionX, Player.PositionY);
-                if (item != null)
+                // Sprawdź kolizję z przedmiotami
+                if (Player.CanMoveTo(newX, newY, GameMap.CurrentRoom.Items))
                 {
-                    InteractionRequested?.Invoke(item);
+                    Player.PositionX = newX;
+                    Player.PositionY = newY;
+
+                    RoomUpdated?.Invoke();
+                    PlayerStatusUpdated?.Invoke();
+                }
+                else
+                {
+                    MessageBox.Show("Nie możesz przejść tutaj – coś blokuje drogę.");
                 }
             }
             else
@@ -73,6 +71,7 @@ namespace EscapeRoomWPF.Controllers
                 MessageBox.Show("Nie możesz wyjść poza granice mapy!");
             }
         }
+
 
         public void InteractWithCurrentItem(string interaction)
         {
