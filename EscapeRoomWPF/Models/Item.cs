@@ -8,6 +8,7 @@ namespace EscapeRoomWPF.Models.Items
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsCollectible { get; set; }
+        public bool IsCollidable { get; set; } = true;
         public int PositionX { get; set; }
         public int PositionY { get; set; }
         public string ImagePath { get; set; }

@@ -21,12 +21,12 @@ namespace EscapeRoomWPF.Views
             // Inicjalizacja gry
             var player = new Player(4, 5);
             var room = new Room(10, 10); // Tworzenie pokoju o wymiarach 10x10
-            room.AddItem(new Bookshelf(1, 0, new Models.Items.Key(2, 3)));
-            room.AddItem(new Desk(5, 1));
-            room.AddItem(new Cobweb(9, 9));
-            room.AddItem(new Chandelier(5, 5));
-            room.AddItem(new Door(9, 5, "1234") { IsExit = true }); // Drzwi wyjściowe
-            room.AddItem(new Painting(0, 5));
+            room.AddItem(new Bookshelf(1, 0, new Models.Items.Key(2, 3)) { IsCollidable = true });
+            room.AddItem(new Desk(5, 1) { IsCollidable = true });
+            room.AddItem(new Cobweb(9, 9) { IsCollidable = false});
+            room.AddItem(new Chandelier(5, 5) { IsCollidable = false });
+            room.AddItem(new Door(9, 5, "1234") { IsExit = true, IsCollidable = true }); // Drzwi wyjściowe
+            room.AddItem(new Painting(0, 5) { IsCollidable = true });
 
             var gameMap = new GameMap(player, room);
 

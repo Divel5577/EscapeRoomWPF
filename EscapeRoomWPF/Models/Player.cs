@@ -1,4 +1,8 @@
-﻿namespace EscapeRoomWPF.Models
+﻿using EscapeRoomWPF.Models.Items;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace EscapeRoomWPF.Models
 {
     public class Player
     {
@@ -31,8 +35,12 @@
         {
             return newX >= 0 && newX < mapWidth && newY >= 0 && newY < mapHeight;
         }
-
+        public bool CanMoveTo(int newX, int newY, List<Item> items)
+        {
+            // Sprawdź, czy na danej pozycji znajduje się kolizyjny przedmiot
+            var blockingItem = items.FirstOrDefault(item => item.PositionX == newX && item.PositionY == newY && item.IsCollidable);
+            // Jeśli nie znaleziono kolizyjnego przedmiotu, ruch jest możliwy
+            return blockingItem == null;
+        }
     }
-
-
 }
