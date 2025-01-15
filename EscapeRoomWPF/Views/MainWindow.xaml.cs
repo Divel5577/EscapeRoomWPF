@@ -20,7 +20,7 @@ namespace EscapeRoomWPF.Views
 
             // Inicjalizacja gry
             var player = new Player(4, 5);
-            var room = new Room(10, 10); // Tworzenie pokoju o wymiarach 10x10
+            var room = new Room(10, 10);
             var gameMap = new GameMap(player, room);
 
             gameController = new GameController(gameMap, player);
@@ -97,6 +97,7 @@ namespace EscapeRoomWPF.Views
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            if (!IsEnabled) return; // Jeśli okno jest zablokowane, nic nie rób
             switch (e.Key)
             {
                 case System.Windows.Input.Key.Up:
@@ -119,6 +120,8 @@ namespace EscapeRoomWPF.Views
 
         private void RoomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!IsEnabled) return; // Jeśli okno jest zablokowane, nic nie rób
+
             var clickPosition = e.GetPosition(RoomCanvas);
 
             // Konwersja pozycji kliknięcia na współrzędne siatki
