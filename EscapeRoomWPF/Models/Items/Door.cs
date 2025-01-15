@@ -32,7 +32,7 @@ namespace EscapeRoomWPF.Models.Items
                     Owner = Application.Current.MainWindow // Ustawienie głównego okna jako właściciela
                 };
 
-                if (dialog.ShowDialog() == true) // Otwórz okno dialogowe
+                if (dialog.ShowDialog() == true)
                 {
                     string inputCode = dialog.InputText;
                     if (inputCode == Code)
@@ -41,18 +41,23 @@ namespace EscapeRoomWPF.Models.Items
 
                         if (IsExit && gameController != null)
                         {
-                            // Zatrzymanie czasu gry i wyświetlenie komunikatu
                             gameController.StopGameTimer();
                             var elapsedTime = gameController.GetElapsedTime();
-                            MessageBox.Show($"Drzwi zostały otwarte! Czas rozgrywki: {elapsedTime:mm\\:ss}");
+
+                            // Wyświetl ekran końcowy jako dialog
+                            var endScreen = new EndScreen(elapsedTime.ToString(@"mm\:ss"))
+                            {
+                                Owner = Application.Current.MainWindow
+                            };
+                            endScreen.ShowDialog();
+
+                            // Zakończ aplikację po zamknięciu ekranu końcowego
+                            Application.Current.Shutdown();
                         }
                         else
                         {
                             MessageBox.Show("Drzwi zostały otwarte!");
                         }
-
-                        // Możesz tutaj wywołać dodatkowe akcje, np. zmianę pokoju
-                        gameController?.MoveToNextRoom();
                     }
                     else
                     {
@@ -85,12 +90,16 @@ namespace EscapeRoomWPF.Models.Items
                     {
                         IsOpen = true;
 
-                        // Zatrzymanie licznika czasu i wyświetlenie czasu gry
                         if (IsExit && gameController != null)
                         {
                             gameController.StopGameTimer();
                             var elapsedTime = gameController.GetElapsedTime();
-                            MessageBox.Show($"Drzwi zostały otwarte! Czas rozgrywki: {elapsedTime:mm\\:ss}");
+
+                            Application.Current.MainWindow.Close();
+
+                            // Wyświetlenie ekranu końcowego
+                            var endScreen = new EndScreen(elapsedTime.ToString(@"mm\:ss"));
+                            endScreen.ShowDialog();
                         }
                         else
                         {
@@ -104,7 +113,5 @@ namespace EscapeRoomWPF.Models.Items
                 }
             }
         }
-
-
     }
 }
