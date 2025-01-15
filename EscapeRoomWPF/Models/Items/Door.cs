@@ -18,7 +18,7 @@ namespace EscapeRoomWPF.Models.Items
         public Door() : base() { }
 
         public Door(int positionX, int positionY, string code, GameController controller = null)
-    : base("Drzwi", "Metalowe drzwi z klawiaturą numeryczną. Musisz wpisać kod, aby je otworzyć.", false, positionX, positionY, "Assets/Images/door.png")
+            : base("Drzwi", "Metalowe drzwi z klawiaturą numeryczną. Musisz wpisać kod, aby je otworzyć.", false, positionX, positionY, "Assets/Images/door.png")
         {
             Code = code;
             IsOpen = false;
@@ -38,7 +38,18 @@ namespace EscapeRoomWPF.Models.Items
                     if (inputCode == Code)
                     {
                         IsOpen = true;
-                        MessageBox.Show("Drzwi zostały otwarte!");
+
+                        if (IsExit && gameController != null)
+                        {
+                            // Zatrzymanie czasu gry i wyświetlenie komunikatu
+                            gameController.StopGameTimer();
+                            var elapsedTime = gameController.GetElapsedTime();
+                            MessageBox.Show($"Drzwi zostały otwarte! Czas rozgrywki: {elapsedTime:mm\\:ss}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Drzwi zostały otwarte!");
+                        }
 
                         // Możesz tutaj wywołać dodatkowe akcje, np. zmianę pokoju
                         gameController?.MoveToNextRoom();
@@ -52,6 +63,7 @@ namespace EscapeRoomWPF.Models.Items
         }
 
 
+
         public void SetGameController(GameController controller)
         {
             gameController = controller;
@@ -63,17 +75,27 @@ namespace EscapeRoomWPF.Models.Items
             {
                 var dialog = new InputDialog
                 {
-                    Owner = Application.Current.MainWindow // Ustawienie głównego okna jako właściciela
+                    Owner = Application.Current.MainWindow
                 };
 
-                if (dialog.ShowDialog() == true) // Otwórz okno dialogowe
+                if (dialog.ShowDialog() == true)
                 {
                     string inputCode = dialog.InputText;
                     if (inputCode == Code)
                     {
                         IsOpen = true;
-                        MessageBox.Show("Drzwi zostały otwarte!");
-                        gameController?.MoveToNextRoom();
+
+                        // Zatrzymanie licznika czasu i wyświetlenie czasu gry
+                        if (IsExit && gameController != null)
+                        {
+                            gameController.StopGameTimer();
+                            var elapsedTime = gameController.GetElapsedTime();
+                            MessageBox.Show($"Drzwi zostały otwarte! Czas rozgrywki: {elapsedTime:mm\\:ss}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Drzwi zostały otwarte!");
+                        }
                     }
                     else
                     {
@@ -82,6 +104,7 @@ namespace EscapeRoomWPF.Models.Items
                 }
             }
         }
+
 
     }
 }

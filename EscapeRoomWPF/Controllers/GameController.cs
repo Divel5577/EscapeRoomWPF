@@ -2,6 +2,7 @@
 using EscapeRoomWPF.Models;
 using System;
 using System.Windows;
+using System.Diagnostics;
 
 namespace EscapeRoomWPF.Controllers
 {
@@ -9,6 +10,8 @@ namespace EscapeRoomWPF.Controllers
     {
         public GameMap GameMap { get; private set; }
         public Player Player { get; private set; }
+
+        private Stopwatch gameTimer;
 
 
         public event Action RoomUpdated; // Wydarzenie dla widoku mapy
@@ -18,6 +21,21 @@ namespace EscapeRoomWPF.Controllers
         {
             this.GameMap = map;
             this.Player = player;
+            gameTimer = new Stopwatch();
+        }
+        public void StartGameTimer()
+        {
+            gameTimer.Start();
+        }
+
+        public void StopGameTimer()
+        {
+            gameTimer.Stop();
+        }
+
+        public TimeSpan GetElapsedTime()
+        {
+            return gameTimer.Elapsed;
         }
 
         public void MoveToNextRoom()
