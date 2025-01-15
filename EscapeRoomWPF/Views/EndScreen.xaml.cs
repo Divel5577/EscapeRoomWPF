@@ -13,11 +13,6 @@ namespace EscapeRoomWPF.Views
 
         private void OnExitClick(object sender, RoutedEventArgs e)
         {
-            // Zamknij wszystkie otwarte okna
-            foreach (var window in Application.Current.Windows.OfType<Window>().ToList())
-            {
-                window.Close();
-            }
             Application.Current.Shutdown();
         }
     }

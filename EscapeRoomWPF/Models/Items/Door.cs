@@ -44,12 +44,15 @@ namespace EscapeRoomWPF.Models.Items
                             gameController.StopGameTimer();
                             var elapsedTime = gameController.GetElapsedTime();
 
-                            // Przejście do ekranu końcowego
-                            var endScreen = new EndScreen(elapsedTime.ToString(@"mm\:ss"));
-                            endScreen.Show();
+                            // Wyświetl ekran końcowy jako dialog
+                            var endScreen = new EndScreen(elapsedTime.ToString(@"mm\:ss"))
+                            {
+                                Owner = Application.Current.MainWindow
+                            };
+                            endScreen.ShowDialog();
 
-                            // Zamknięcie głównego okna
-                            Application.Current.MainWindow.Close();
+                            // Zakończ aplikację po zamknięciu ekranu końcowego
+                            Application.Current.Shutdown();
                         }
                         else
                         {
@@ -92,15 +95,10 @@ namespace EscapeRoomWPF.Models.Items
                             gameController.StopGameTimer();
                             var elapsedTime = gameController.GetElapsedTime();
 
-                            // Wyświetl okno końcowe
-                            var endScreen = new EndScreen(elapsedTime.ToString(@"mm\:ss"))
-                            {
-                                Owner = Application.Current.MainWindow // Ustawienie właściciela jako MainWindow
-                            };
+                            Application.Current.MainWindow.Close();
 
-                            // Zablokuj główne okno gry
-                            Application.Current.MainWindow.IsEnabled = false;
-
+                            // Wyświetlenie ekranu końcowego
+                            var endScreen = new EndScreen(elapsedTime.ToString(@"mm\:ss"));
                             endScreen.ShowDialog();
                         }
                         else

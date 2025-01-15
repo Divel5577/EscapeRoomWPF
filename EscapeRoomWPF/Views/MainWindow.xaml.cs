@@ -205,9 +205,6 @@ namespace EscapeRoomWPF.Views
             }
         }
 
-
-
-
         private void OnInventoryInteractClick(object sender, RoutedEventArgs e)
         {
             // Pobierz nazwę wybranego przedmiotu w ekwipunku
@@ -239,8 +236,6 @@ namespace EscapeRoomWPF.Views
                 MessageBox.Show("Nie wybrano przedmiotu z ekwipunku.");
             }
         }
-
-
 
         private void OnExitClick(object sender, RoutedEventArgs e)
         {
