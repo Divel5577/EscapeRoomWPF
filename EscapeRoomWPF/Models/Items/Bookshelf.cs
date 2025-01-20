@@ -10,11 +10,15 @@ namespace EscapeRoomWPF.Models.Items
         public Bookshelf() : base() { }
 
         public Bookshelf(int positionX, int positionY, Item hiddenItem)
-    : base("Półka", "Wygląda, jakby można ją było przesunąć.", false, positionX, positionY, "Assets/Images/bookshelf.png")
+            : base("Półka", "Wygląda, jakby można ją było przesunąć.", false, positionX, positionY, "Assets/Images/bookshelf.png")
         {
             HiddenItem = hiddenItem;
             IsMoved = false;
+            InitializeInteractions();
+        }
 
+        public override void InitializeInteractions()
+        {
             AddInteraction("Przesuń", inventory =>
             {
                 if (!IsMoved)
@@ -28,24 +32,6 @@ namespace EscapeRoomWPF.Models.Items
                     MessageBox.Show("Półka została już przesunięta.");
                 }
             });
-        }
-
-        public override void OnInteract(string interaction, Inventory inventory)
-        {
-            if (interaction == "Przesuń" && !IsMoved)
-            {
-                IsMoved = true;
-                inventory.AddItem(HiddenItem);
-                MessageBox.Show("Przesunąłeś półkę i znalazłeś ukryty przedmiot!");
-            }
-            else if (interaction == "Przesuń" && IsMoved)
-            {
-                MessageBox.Show("Półka została już przesunięta.");
-            }
-            else
-            {
-                base.OnInteract(interaction, inventory);
-            }
         }
     }
 }

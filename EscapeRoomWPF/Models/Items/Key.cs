@@ -7,7 +7,12 @@ namespace EscapeRoomWPF.Models.Items
         public Key() : base() { }
 
         public Key(int positionX, int positionY)
-    : base("Klucz", "Mały mosiężny klucz. Może pasować do zamka.", true, positionX, positionY, "Assets/Images/key.png")
+            : base("Klucz", "Mały mosiężny klucz. Może pasować do zamka.", true, positionX, positionY, "Assets/Images/key.png")
+        {
+            InitializeInteractions();
+        }
+
+        public override void InitializeInteractions()
         {
             AddInteraction("Zbierz", inventory =>
             {
@@ -27,24 +32,5 @@ namespace EscapeRoomWPF.Models.Items
                 MessageBox.Show("To mały mosiężny klucz. Może pasować do zamka.");
             });
         }
-
-
-        public override void OnInteract(string interaction, Inventory inventory)
-        {
-            if (interaction == "Użyj")
-            {
-                MessageBox.Show("Użyłeś klucza.");
-            }
-            else if (interaction == "Oglądaj")
-            {
-                MessageBox.Show("To mały mosiężny klucz. Może pasować do zamka.");
-            }
-            else
-            {
-                base.OnInteract(interaction, inventory);
-            }
-        }
-
-
     }
 }

@@ -17,6 +17,12 @@
             <Button Name="InteractButton" Content="Wykonaj" Width="200" Height="30" Click="OnInteractClick"/>
         </StackPanel>
 
+        <!-- Zapis gry -->
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,10">
+            <Button Name="SaveGameButton" Content="Zapisz Grę" Width="200" Height="30" Click="OnSaveGameClick" Margin="10,10,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        </StackPanel>
+
+
         <!-- Panel ekwipunku -->
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10">
             <TextBlock Text="Ekwipunek:" FontWeight="Bold" FontSize="16" />
@@ -29,7 +35,7 @@
         </StackPanel>
 
         <!-- Panel statusu gracza -->
-        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10">
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">
             <TextBlock Name="PlayerPositionText" FontSize="14" />
         </StackPanel>
     </Grid>

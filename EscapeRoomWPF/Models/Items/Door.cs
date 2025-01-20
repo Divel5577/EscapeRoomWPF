@@ -23,60 +23,23 @@ namespace EscapeRoomWPF.Models.Items
             Code = code;
             IsOpen = false;
             gameController = controller;
-
-            // Dodanie interakcji "Otwórz"
-            AddInteraction("Otwórz", inventory =>
-            {
-                var dialog = new InputDialog
-                {
-                    Owner = Application.Current.MainWindow // Ustawienie głównego okna jako właściciela
-                };
-
-                if (dialog.ShowDialog() == true)
-                {
-                    string inputCode = dialog.InputText;
-                    if (inputCode == Code)
-                    {
-                        IsOpen = true;
-
-                        if (IsExit && gameController != null)
-                        {
-                            gameController.StopGameTimer();
-                            var elapsedTime = gameController.GetElapsedTime();
-
-                            // Wyświetl ekran końcowy jako dialog
-                            var endScreen = new EndScreen(elapsedTime.ToString(@"mm\:ss"))
-                            {
-                                Owner = Application.Current.MainWindow
-                            };
-                            endScreen.ShowDialog();
-
-                            // Zakończ aplikację po zamknięciu ekranu końcowego
-                            Application.Current.Shutdown();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Drzwi zostały otwarte!");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Kod niepoprawny.");
-                    }
-                }
-            });
+            InitializeInteractions();
         }
-
-
 
         public void SetGameController(GameController controller)
         {
             gameController = controller;
         }
-
         public override void OnInteract(string interaction, Inventory inventory)
         {
-            if (interaction == "Otwórz")
+            if (Interactions.ContainsKey(interaction))
+            {
+                Interactions[interaction](inventory);
+            }
+        }
+        public override void InitializeInteractions()
+        {
+            AddInteraction("Otwórz", inventory =>
             {
                 var dialog = new InputDialog
                 {
@@ -95,6 +58,7 @@ namespace EscapeRoomWPF.Models.Items
                             gameController.StopGameTimer();
                             var elapsedTime = gameController.GetElapsedTime();
 
+                            // Zamknięcie głównego okna gry
                             Application.Current.MainWindow.Close();
 
                             // Wyświetlenie ekranu końcowego
@@ -111,7 +75,7 @@ namespace EscapeRoomWPF.Models.Items
                         MessageBox.Show("Kod niepoprawny.");
                     }
                 }
-            }
+            });
         }
     }
 }

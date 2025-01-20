@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace EscapeRoomWPF.Models.Items
 {
@@ -13,7 +14,7 @@ namespace EscapeRoomWPF.Models.Items
         public int PositionY { get; set; }
         public string ImagePath { get; set; }
 
-        // Nowe pole: interakcje jako słownik
+        [JsonIgnore]
         public Dictionary<string, Action<Inventory>> Interactions { get; private set; }
 
         // Konstruktor bezparametrowy wymagany do deserializacji
@@ -45,6 +46,12 @@ namespace EscapeRoomWPF.Models.Items
             {
                 Console.WriteLine($"Interakcja \"{interaction}\" nie jest dostępna dla {Name}.");
             }
+        }
+        // Wirtualna metoda do inicjalizacji interakcji
+        public virtual void InitializeInteractions()
+        {
+            // Implementacja do nadpisania w klasach dziedziczących
+
         }
 
         // Dodawanie nowej interakcji
