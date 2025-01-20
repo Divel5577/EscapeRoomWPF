@@ -9,10 +9,14 @@ namespace EscapeRoomWPF.Models.Items
         public Painting() : base() { }
 
         public Painting(int positionX, int positionY)
-    : base("Obraz", "Obraz przedstawiający oko. Wygląda, jakby skrywał coś więcej.", false, positionX, positionY, "Assets/Images/painting.png")
+            : base("Obraz", "Obraz przedstawiający oko. Wygląda, jakby skrywał coś więcej.", false, positionX, positionY, "Assets/Images/painting.png")
         {
             isKeyholeVisible = false;
+            InitializeInteractions();
+        }
 
+        public override void InitializeInteractions()
+        {
             AddInteraction("Oglądaj", inventory =>
             {
                 if (isKeyholeVisible)
@@ -38,38 +42,5 @@ namespace EscapeRoomWPF.Models.Items
                 }
             });
         }
-
-
-        public override void OnInteract(string interaction, Inventory inventory)
-        {
-            if (interaction == "Oglądaj")
-            {
-                if (isKeyholeVisible)
-                {
-                    MessageBox.Show("Widzisz otwór na klucz za obrazem.");
-                }
-                else
-                {
-                    MessageBox.Show("Obraz przedstawia tajemnicze oko.");
-                }
-            }
-            else if (interaction == "Użyj klucza")
-            {
-                if (inventory.HasItem("Klucz"))
-                {
-                    isKeyholeVisible = true;
-                    MessageBox.Show("Użyłeś klucza i odsłoniłeś kod do drzwi: 1234.");
-                }
-                else
-                {
-                    MessageBox.Show("Nie masz klucza, aby coś zrobić.");
-                }
-            }
-            else
-            {
-                base.OnInteract(interaction, inventory);
-            }
-        }
-
     }
 }

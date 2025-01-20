@@ -3,6 +3,7 @@ using System.Windows.Input;
 using EscapeRoomWPF.Models;
 using EscapeRoomWPF.Models.Items;
 using EscapeRoomWPF.Controllers;
+using EscapeRoomWPF.Helpers;
 using System.Linq;
 using System.Windows.Controls;
 using System;
@@ -235,6 +236,33 @@ namespace EscapeRoomWPF.Views
             {
                 MessageBox.Show("Nie wybrano przedmiotu z ekwipunku.");
             }
+        }
+
+        private void OnSaveGameClick(object sender, RoutedEventArgs e)
+        {
+            var gameState = new GameState
+            {
+                PlayerPositionX = gameController.Player.PositionX,
+                PlayerPositionY = gameController.Player.PositionY,
+                Inventory = gameController.Player.Inventory.Items,
+                RoomItems = gameController.GameMap.CurrentRoom.Items
+            };
+
+            GameSaveLoad.SaveGame(gameState);
+            MessageBox.Show("Gra została zapisana!");
+        }
+        public void RestoreGameState(GameState gameState)
+        {
+            gameController.Player.PositionX = gameState.PlayerPositionX;
+            gameController.Player.PositionY = gameState.PlayerPositionY;
+            gameController.Player.Inventory.Items.Clear();
+            gameController.Player.Inventory.Items.AddRange(gameState.Inventory);
+            gameController.GameMap.CurrentRoom.Items.Clear();
+            gameController.GameMap.CurrentRoom.Items.AddRange(gameState.RoomItems);
+
+            RenderRoom();
+            UpdatePlayerStatus();
+            UpdateInventoryList();
         }
 
         private void OnExitClick(object sender, RoutedEventArgs e)

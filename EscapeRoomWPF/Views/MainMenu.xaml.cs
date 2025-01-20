@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using EscapeRoomWPF.Helpers;
 
 namespace EscapeRoomWPF.Views
 {
@@ -19,8 +20,22 @@ namespace EscapeRoomWPF.Views
 
         private void LoadGame_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funkcja wczytywania gry jest jeszcze w trakcie implementacji.", "Wczytaj Grę");
+            var gameState = GameSaveLoad.LoadGame();
+            if (gameState == null)
+            {
+                MessageBox.Show("Brak zapisanego stanu gry.");
+                return;
+            }
+
+            var mainWindow = new MainWindow();
+
+            // Przywrócenie stanu gry
+            mainWindow.RestoreGameState(gameState);
+
+            mainWindow.Show();
+            this.Close();
         }
+
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
