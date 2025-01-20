@@ -25,8 +25,8 @@ namespace EscapeRoomWPF.Views
             var gameMap = new GameMap(player, room);
 
             gameController = new GameController(gameMap, player);
-            
-            room.AddItem(new Bookshelf(1, 0, new Models.Items.Key(2, 3)) { IsCollidable = true });
+
+            room.AddItem(new Bookshelf(1, 0) { IsCollidable = true });
             room.AddItem(new Desk(5, 1) { IsCollidable = true });
             room.AddItem(new Cobweb(9, 9) { IsCollidable = false });
             room.AddItem(new Chandelier(5, 5) { IsCollidable = false });
@@ -259,6 +259,18 @@ namespace EscapeRoomWPF.Views
             gameController.Player.Inventory.Items.AddRange(gameState.Inventory);
             gameController.GameMap.CurrentRoom.Items.Clear();
             gameController.GameMap.CurrentRoom.Items.AddRange(gameState.RoomItems);
+
+            // Przywrócenie interakcji dla przedmiotów w pokoju
+            foreach (var item in gameController.GameMap.CurrentRoom.Items)
+            {
+                item.InitializeInteractions();
+            }
+
+            // Przywrócenie interakcji dla przedmiotów w ekwipunku
+            foreach (var item in gameController.Player.Inventory.Items)
+            {
+                item.InitializeInteractions();
+            }
 
             RenderRoom();
             UpdatePlayerStatus();

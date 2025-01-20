@@ -46,7 +46,7 @@ namespace EscapeRoomWPF.Helpers
                 var typeProperty = doc.RootElement.GetProperty("Type").GetString();
                 var json = doc.RootElement.GetRawText();
 
-                return typeProperty switch
+                Item item = typeProperty switch
                 {
                     "Door" => JsonSerializer.Deserialize<Door>(json, options),
                     "Bookshelf" => JsonSerializer.Deserialize<Bookshelf>(json, options),
@@ -58,6 +58,20 @@ namespace EscapeRoomWPF.Helpers
                     "Journal" => JsonSerializer.Deserialize<Journal>(json, options),
                     _ => throw new NotSupportedException($"Nieobsługiwany typ przedmiotu: {typeProperty}")
                 };
+
+                // Przywrócenie interakcji
+                item.InitializeInteractions();
+
+                if (item is Bookshelf bookshelf)
+                {
+                    bookshelf.IsMoved = doc.RootElement.GetProperty("IsMoved").GetBoolean();
+                }
+                if (item is Desk desk)
+                {
+                    desk.IsSearched = doc.RootElement.GetProperty("IsSearched").GetBoolean();
+                }
+
+                return item;
             }
         }
 

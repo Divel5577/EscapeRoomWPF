@@ -14,19 +14,6 @@ namespace EscapeRoomWPF.Models.Items
 
         public override void InitializeInteractions()
         {
-            AddInteraction("Zbierz", inventory =>
-            {
-                if (!inventory.HasItem("Klucz"))
-                {
-                    inventory.AddItem(this);
-                    MessageBox.Show("Podniosłeś klucz.");
-                }
-                else
-                {
-                    MessageBox.Show("Już masz ten klucz.");
-                }
-            });
-
             AddInteraction("Oglądaj", inventory =>
             {
                 MessageBox.Show("To mały mosiężny klucz. Może pasować do zamka.");
