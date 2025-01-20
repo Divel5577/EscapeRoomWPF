@@ -30,7 +30,7 @@
             <Button Name="InventoryInteractButton" Content="Użyj" Width="200" Height="30" Click="OnInventoryInteractClick"/>
         </StackPanel>
 
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,466,0,0">
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,466,0,0">
             <Button Name="ExitButton" Content="Zakończ grę" Width="200" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10" Click="OnExitClick"/>
         </StackPanel>
 
