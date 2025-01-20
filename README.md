@@ -1,104 +1,107 @@
-Escape Room WPF Game
-Welcome to the Escape Room WPF Game, an interactive puzzle-solving adventure where you explore, interact with objects, and escape a mysterious room! This project demonstrates the use of the Model-View-Controller (MVC) architecture to create a modular and visually engaging application with a Graphical User Interface (GUI) powered by Windows Presentation Foundation (WPF).
+#General Description
+Escape Room WPF Game is an interactive puzzle-solving adventure featuring a mysterious room.
+Built with Model-View-Controller (MVC) architecture using Windows Presentation Foundation (WPF) for GUI.
 
-Features
-Interactive Gameplay
-Move around the room using arrow keys.
-Interact with objects by selecting options from an intuitive GUI menu.
-Collect and manage items in your inventory to solve puzzles and progress.
-Inventory System
-View collected items in a dedicated inventory panel.
-Use items from your inventory to interact with objects or solve puzzles.
-Game Save & Load
-Save your progress to a JSON file and continue later by loading the saved game.
-Timed Gameplay
-Track the duration of your playthrough and view your total playtime upon escaping the room.
-Puzzle Solving
-Solve puzzles by interacting with objects like bookshelves, paintings, and desks.
-Use items such as keys and journals to uncover secrets and unlock doors.
-Extensible Object System
-Items like Doors, Keys, and Bookshelves inherit from a base Item class, making it easy to add new item types and interactions.
-Dynamic GUI
-A visually engaging WPF interface with responsive design.
-Tooltip hints for buttons and interactive elements to guide the player.
-Panels for interactions, inventory, and player status are dynamically updated during gameplay.
-Project Structure
-Controllers
-Manage core game logic, including player movement, interaction management, and game state updates.
 
-GameController: Handles game state, player actions, and room interactions.
+#Features
+-Interactive Gameplay
+Navigate the room with arrow keys.
+Use an intuitive GUI menu for object interactions.
+Collect and manage items to solve puzzles.
 
-Models
-Define the core data structures and game logic.
+-Inventory System
+View and manage collected items in a dedicated inventory panel.
+Use inventory items to interact with objects or solve puzzles.
 
-Player: Tracks the player's position and inventory.
-Room: Represents the game room, its items, and layout.
-Inventory: Manages collected items and provides methods to add or remove items.
-Item: A base class for all interactive objects, with specialized subclasses such as Bookshelf, Desk, and Door.
-Views
-Provide the user interface for interacting with the game.
+-Game Save & Load
+Save your game progress in a JSON file.
+Resume gameplay from a saved state.
 
-MainWindow: The primary game window that renders the room, player position, and GUI panels.
-EndScreen: Displays the final playtime and congratulatory message upon escaping.
-MainMenu: A menu to start a new game or load a saved game.
-Helpers
-Utility classes for tasks like serialization and custom JSON converters.
+-Timed Gameplay
+Track playtime duration and display total time upon escaping.
 
-GameSaveLoad: Handles saving and loading game state to/from a JSON file.
-ItemJsonConverter: Ensures proper serialization and deserialization of abstract and inherited item types.
-How to Play
-Start the Game
-Launch the application and select "Start New Game" from the main menu.
-Use the arrow keys to navigate the room.
-Interact with Objects
-Click on an object to view its interaction options in the interaction panel.
-Select an interaction and click "Execute" to perform the action.
-Use Inventory Items
-Select an item from your inventory and use it to interact with objects in the room.
-Save and Load
-Save your game at any time using the "Save Game" button.
-Load a previously saved game from the main menu.
-Complete the Game
-Solve puzzles, unlock the door, and escape the room to win. Your total playtime will be displayed on the end screen.
-Setup Instructions
+-Puzzle Solving
+Interact with objects like bookshelves, paintings, and desks.
+Use tools like keys and journals to unlock doors or uncover secrets.
+
+-Extensible Object System
+Items such as doors, keys, and bookshelves inherit from a base Item class.
+Easily add new item types and interactions.
+
+-Dynamic GUI
+A responsive, visually engaging WPF interface.
+Tooltip hints guide players.
+Interactive panels update dynamically during gameplay.
+
+
+#Project Structure
+
+-Controllers
+Handle game logic, player movement, and state updates.
+GameController: Manages state, player actions, and room interactions.
+
+-Models
+Define data structures and logic:
+Player: Tracks position and inventory.
+Room: Represents the game layout and objects.
+Inventory: Manages items and provides interaction methods.
+Item: Base class for interactive objects like bookshelves and doors.
+
+-Views
+Provide the user interface:
+MainWindow: Main game window showing the map, player position, and panels.
+EndScreen: Displays playtime and congratulatory messages.
+MainMenu: Start new games or load saved ones.
+
+-Helpers
+Utility classes for serialization and custom JSON conversions:
+GameSaveLoad: Save/load game state.
+ItemJsonConverter: Handles serialization of abstract and inherited items.
+
+
+
+#How to Play
+-Start the Game:
+Launch the application and select "Start New Game."
+Navigate the room using arrow keys.
+
+-Interact with Objects:
+Click objects to view interaction options.
+Select and execute interactions via the interaction panel.
+
+-Use Inventory Items:
+Select an item from the inventory to interact with objects.
+
+-Save and Load:
+Save progress via the "Save Game" button.
+Resume from the main menu.
+
+-Complete the Game:
+Solve puzzles, unlock doors, and escape the room.
+View your total playtime on the end screen.
+
+
+#Setup Instructions
 Prerequisites
-.NET 6.0 or later
-Visual Studio (recommended) or a compatible IDE
-Running the Game
-Clone the repository:
-bash
-Kopiuj
-Edytuj
+.NET 6.0 or later.
+Visual Studio (recommended) or a compatible IDE.
+
+#Running the Game
+-Clone the repository:
 git clone https://github.com/Divel5577/EscapeRoomWPF.git
 cd EscapeRoomWPF
-Open the project in Visual Studio.
-Build and run the application.
+
+-Open the project in Visual Studio.
+-Build and run the application.
+
+
+#Extending the Game
 Adding New Items
-To extend the game with new items:
-
 Create a new class inheriting from Item.
-Implement specific interactions in the InitializeInteractions method.
-Add the new item to the room in MainWindow.xaml.cs.
-Example:
-csharp
-Kopiuj
-Edytuj
-public class Lamp : Item
-{
-    public Lamp(int positionX, int positionY)
-        : base("Lamp", "A small desk lamp. It doesn't seem to work.", false, positionX, positionY, "Assets/Images/lamp.png")
-    {
-        InitializeInteractions();
-    }
+Implement interactions in the InitializeInteractions method.
+Add the item to the room in MainWindow.xaml.cs.
 
-    public override void InitializeInteractions()
-    {
-        AddInteraction("Inspect", inventory =>
-        {
-            MessageBox.Show("The lamp is dusty but has no bulb.");
-        });
-    }
-}
-Known Issues
-Some interactions may not correctly refresh the GUI. Ensure saved games are not manually edited to avoid deserialization errors.
-Contributors
+
+Contributors:
+Gracjan Czyżewski
+Patryk Dulkowski
