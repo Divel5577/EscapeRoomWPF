@@ -34,7 +34,7 @@ namespace EscapeRoomWPF.Models.Items
                 if (inventory.HasItem("Klucz"))
                 {
                     isKeyholeVisible = true;
-                    MessageBox.Show("Użyłeś klucza i odsłoniłeś otwór za obrazem.");
+                    MessageBox.Show("Użyłeś klucza i odsłoniłeś kod wyryty w drewnie: 1234.");
                 }
                 else
                 {
