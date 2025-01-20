@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Windows;
 
-namespace EscapeRoomWPF.Models.Items
+namespace EscapeRoomWPF.Models
 {
     public abstract class Item
     {
@@ -44,7 +45,7 @@ namespace EscapeRoomWPF.Models.Items
             }
             else
             {
-                Console.WriteLine($"Interakcja \"{interaction}\" nie jest dostępna dla {Name}.");
+                MessageBox.Show("Nie można wykonać tej akcji.");
             }
         }
         // Wirtualna metoda do inicjalizacji interakcji

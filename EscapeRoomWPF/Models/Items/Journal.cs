@@ -4,7 +4,7 @@ namespace EscapeRoomWPF.Models.Items
 {
     public class Journal : Item
     {
-        public string Content { get; private set; }
+        public string Content { get; set; }
 
         public Journal() : base() { }
 
