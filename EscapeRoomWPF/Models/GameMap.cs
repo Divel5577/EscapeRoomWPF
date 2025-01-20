@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using EscapeRoomWPF.Models;
 using EscapeRoomWPF.Models.Items;
 
@@ -31,7 +32,7 @@ namespace EscapeRoomWPF.Models
             }
             else
             {
-                Console.WriteLine("Nie możesz pójść w tym kierunku.");
+                MessageBox.Show("Nie możesz pójść w tym kierunku.");
             }
         }
     }

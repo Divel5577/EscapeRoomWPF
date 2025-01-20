@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Windows;
 
 namespace EscapeRoomWPF.Models
 {
@@ -19,11 +20,11 @@ namespace EscapeRoomWPF.Models
             if (!Items.Any(existingItem => existingItem.Name == item.Name))
             {
                 Items.Add(item);
-                Console.WriteLine($"{item.Name} został dodany do ekwipunku.");
+                MessageBox.Show($"{item.Name} dodany do ekwipunku.");
             }
             else
             {
-                Console.WriteLine($"{item.Name} już znajduje się w ekwipunku.");
+                MessageBox.Show("Ten przedmiot już znajduje się w ekwipunku.");
             }
         }
         public Item GetItem(string itemName)

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeRoomWPF", "EscapeRoomWPF\EscapeRoomWPF.csproj", "{D5B69FF7-CE4C-4BBC-B3E4-CFFB43065565}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeRoomWPF_Tests", "EscapeRoomWPF_Tests\EscapeRoomWPF_Tests.csproj", "{C44827A7-D551-43C3-B58B-92A41022F020}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D5B69FF7-CE4C-4BBC-B3E4-CFFB43065565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B69FF7-CE4C-4BBC-B3E4-CFFB43065565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B69FF7-CE4C-4BBC-B3E4-CFFB43065565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44827A7-D551-43C3-B58B-92A41022F020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44827A7-D551-43C3-B58B-92A41022F020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44827A7-D551-43C3-B58B-92A41022F020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44827A7-D551-43C3-B58B-92A41022F020}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,9 +21,17 @@ namespace EscapeRoomWPF.Models.Items
                 if (!IsMoved)
                 {
                     IsMoved = true;
-                    var key = new Key(PositionX, PositionY);
-                    inventory.AddItem(key);
-                    MessageBox.Show("Przesunąłeś półkę i znalazłeś klucz.");
+
+                    if (!inventory.HasItem("Klucz"))
+                    {
+                        var key = new Key(PositionX, PositionY);
+                        MessageBox.Show("Przesunąłeś półkę i znalazłeś ukryty klucz!");
+                        inventory.AddItem(key);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Przesunąłeś półkę, ale nic nie znalazłeś.");
+                    }
                 }
                 else
                 {

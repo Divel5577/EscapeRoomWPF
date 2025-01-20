@@ -22,8 +22,8 @@ namespace EscapeRoomWPF.Models.Items
                 {
                     IsSearched = true;
                     var journal = new Journal(PositionX, PositionY);
-                    inventory.AddItem(journal);
                     MessageBox.Show("Przeszukując biurko, znajdujesz stary dziennik.");
+                    inventory.AddItem(journal);
                 }
                 else
                 {
