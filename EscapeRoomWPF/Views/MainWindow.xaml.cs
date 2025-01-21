@@ -264,6 +264,16 @@ namespace EscapeRoomWPF.Views
             foreach (var item in gameController.GameMap.CurrentRoom.Items)
             {
                 item.InitializeInteractions();
+                if (item is Door door)
+                {
+                    door.SetGameController(gameController); // Przypisanie kontrolera
+                }
+            }
+
+            // Przywrócenie interakcji dla przedmiotów w pokoju
+            foreach (var item in gameController.GameMap.CurrentRoom.Items)
+            {
+                item.InitializeInteractions();
             }
 
             // Przywrócenie interakcji dla przedmiotów w ekwipunku

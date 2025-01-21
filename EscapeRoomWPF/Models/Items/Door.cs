@@ -9,8 +9,8 @@ namespace EscapeRoomWPF.Models.Items
 {
     public class Door : Item
     {
-        public string Code { get; }
-        public bool IsOpen { get; private set; }
+        public string Code { get; set; }
+        public bool IsOpen { get; set; }
         public bool IsExit { get; set; }
 
         private GameController gameController;
@@ -41,6 +41,12 @@ namespace EscapeRoomWPF.Models.Items
         {
             AddInteraction("Otwórz", inventory =>
             {
+                if (gameController == null)
+                {
+                    MessageBox.Show("Kontroler gry nie został zainicjalizowany.");
+                    return;
+                }
+
                 var dialog = new InputDialog
                 {
                     Owner = Application.Current.MainWindow
@@ -68,6 +74,7 @@ namespace EscapeRoomWPF.Models.Items
                         else
                         {
                             MessageBox.Show("Drzwi zostały otwarte!");
+                            gameController.MoveToNextRoom();
                         }
                     }
                     else

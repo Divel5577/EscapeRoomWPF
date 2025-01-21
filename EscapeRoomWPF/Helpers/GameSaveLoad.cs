@@ -70,6 +70,11 @@ namespace EscapeRoomWPF.Helpers
                 {
                     desk.IsSearched = doc.RootElement.GetProperty("IsSearched").GetBoolean();
                 }
+                if (item is Door door)
+                {
+                    door.Code = doc.RootElement.GetProperty("Code").GetString();
+                    door.IsOpen = doc.RootElement.GetProperty("IsOpen").GetBoolean();
+                }
 
                 return item;
             }
