@@ -140,7 +140,6 @@ namespace EscapeRoomWPF.Views
                         InteractionList.Items.Add($"{item.Name}: {interaction}");
                     }
                 }
-                MessageBox.Show("Znaleziono przedmiot(y) w otoczeniu. Wybierz interakcję.");
             }
             else
             {
