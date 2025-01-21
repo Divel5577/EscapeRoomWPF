@@ -220,5 +220,10 @@
   <ItemGroup>
     <Resource Include="Views\Assets\Images\painting.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Sounds\click_sound.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
