@@ -26,8 +26,8 @@ namespace EscapeRoomWPF.Views
             // Inicjalizacja MediaPlayera dla dźwięku kliknięcia
             clickSoundPlayer = new MediaPlayer();
             footstepSoundPlayer = new MediaPlayer();
-            clickSoundPlayer.Open(new Uri(@"C:\Visual Programy\EscapeRoomWPF\EscapeRoomWPF\Views\Assets\Sounds\click_sound.mp3", UriKind.Absolute));
-            footstepSoundPlayer.Open(new Uri(@"C:\Visual Programy\EscapeRoomWPF\EscapeRoomWPF\Views\Assets\Sounds\footstep.mp3", UriKind.Absolute));
+            clickSoundPlayer.Open(new Uri(@"C:\Users\Asus\Documents\GitHub\EscapeRoomMVC0.3.1\EscapeRoomWPF\EscapeRoomWPF\Views\Assets\Sounds\click_sound.mp3", UriKind.Absolute));
+            footstepSoundPlayer.Open(new Uri(@"C:\Users\Asus\Documents\GitHub\EscapeRoomMVC0.3.1\EscapeRoomWPF\EscapeRoomWPF\Views\Assets\Sounds\footstep.mp3", UriKind.Absolute));
 
 
             // Inicjalizacja gry
