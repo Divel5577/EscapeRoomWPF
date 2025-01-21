@@ -17,6 +17,7 @@ namespace EscapeRoomWPF.Views
     {
         private GameController gameController;
         private MediaPlayer clickSoundPlayer;
+        private MediaPlayer footstepSoundPlayer;
 
         public MainWindow()
         {
@@ -24,8 +25,9 @@ namespace EscapeRoomWPF.Views
 
             // Inicjalizacja MediaPlayera dla dźwięku kliknięcia
             clickSoundPlayer = new MediaPlayer();
+            footstepSoundPlayer = new MediaPlayer();
             clickSoundPlayer.Open(new Uri(@"C:\Visual Programy\EscapeRoomWPF\EscapeRoomWPF\Views\Assets\Sounds\click_sound.mp3", UriKind.Absolute));
-
+            footstepSoundPlayer.Open(new Uri(@"C:\Visual Programy\EscapeRoomWPF\EscapeRoomWPF\Views\Assets\Sounds\footstep.mp3", UriKind.Absolute));
 
 
             // Inicjalizacja gry
@@ -114,25 +116,46 @@ namespace EscapeRoomWPF.Views
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (!IsEnabled) return; // Jeśli okno jest zablokowane, nic nie rób
+
+            bool moved = false; // Flaga sprawdzająca, czy gracz się poruszył
+
             switch (e.Key)
             {
                 case System.Windows.Input.Key.Up:
                     gameController.MovePlayer("up");
+                    moved = true;
                     break;
                 case System.Windows.Input.Key.Down:
                     gameController.MovePlayer("down");
+                    moved = true;
                     break;
                 case System.Windows.Input.Key.Left:
                     gameController.MovePlayer("left");
+                    moved = true;
                     break;
                 case System.Windows.Input.Key.Right:
                     gameController.MovePlayer("right");
+                    moved = true;
                     break;
+            }
+
+            if (moved)
+            {
+                try
+                {
+                    footstepSoundPlayer.Stop(); 
+                    footstepSoundPlayer.Play();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Błąd odtwarzania dźwięku chodzenia: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
             RenderRoom();
             UpdatePlayerStatus();
         }
+
 
         // Obsługa kliknięcia na obszar mapy
         private void RoomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
