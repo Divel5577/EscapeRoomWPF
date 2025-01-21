@@ -30,11 +30,6 @@ namespace EscapeRoomWPF.Models
             PositionX += deltaX;
             PositionY += deltaY;
         }
-
-        public bool CanMove(int newX, int newY, int mapWidth, int mapHeight)
-        {
-            return newX >= 0 && newX < mapWidth && newY >= 0 && newY < mapHeight;
-        }
         public bool CanMoveTo(int newX, int newY, List<Item> items)
         {
             // Sprawdź, czy na danej pozycji znajduje się kolizyjny przedmiot

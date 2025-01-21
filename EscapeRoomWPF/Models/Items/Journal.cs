@@ -9,7 +9,7 @@ namespace EscapeRoomWPF.Models.Items
         public Journal() : base() { }
 
         public Journal(int positionX, int positionY)
-            : base("Dziennik", "Stary dziennik z pożółkłymi kartkami, leżący na biurku.", true, positionX, positionY, "Assets/Images/journal.png")
+            : base("Dziennik", "Stary dziennik z pożółkłymi kartkami, leżący na biurku.", true, false, positionX, positionY, "Assets/Images/journal.png")
         {
             Content = "Dziennik jest pełen wpisów o tajemniczych wydarzeniach...\n" +
                       "Data: 23 października\n" +

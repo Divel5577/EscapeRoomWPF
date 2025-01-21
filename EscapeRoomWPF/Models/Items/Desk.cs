@@ -8,7 +8,7 @@ namespace EscapeRoomWPF.Models.Items
         public Desk() : base() { }
 
         public Desk(int positionX, int positionY)
-            : base("Biurko", "Stary drewniany stół.", false, positionX, positionY, "Assets/Images/desk.png")
+            : base("Biurko", "Stary drewniany stół.", false, true, positionX, positionY, "Assets/Images/desk.png")
         {
             IsSearched = false;
             InitializeInteractions();

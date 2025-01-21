@@ -7,7 +7,7 @@ namespace EscapeRoomWPF.Models.Items
         public Chandelier() : base() { }
 
         public Chandelier(int positionX, int positionY)
-            : base("Żyrandol", "Stary, zakurzony żyrandol zwisający z sufitu.", false, positionX, positionY, "Assets/Images/chandelier.png")
+            : base("Żyrandol", "Stary, zakurzony żyrandol zwisający z sufitu.", false, false, positionX, positionY, "Assets/Images/chandelier.png")
         {
             InitializeInteractions();
         }

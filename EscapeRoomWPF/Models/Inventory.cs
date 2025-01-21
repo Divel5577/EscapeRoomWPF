@@ -37,12 +37,6 @@ namespace EscapeRoomWPF.Models
             return Items; 
         }
 
-        public void PerformItemInteraction(Item item, string interaction)
-        {
-            item.OnInteract(interaction, this);
-        }
-
-
         public bool HasItem(string itemName)
         {
             return Items.Exists(item => item.Name == itemName);

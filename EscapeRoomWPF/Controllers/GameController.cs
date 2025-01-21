@@ -90,7 +90,7 @@ namespace EscapeRoomWPF.Controllers
             }
         }
 
-
+        // Metoda do interakcji z przedmiotem
         public void InteractWithCurrentItem(string interaction)
         {
             var item = GameMap.CurrentRoom.GetItemAtPosition(Player.PositionX, Player.PositionY);

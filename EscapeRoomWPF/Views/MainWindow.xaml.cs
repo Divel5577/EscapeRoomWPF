@@ -26,6 +26,7 @@ namespace EscapeRoomWPF.Views
 
             gameController = new GameController(gameMap, player);
 
+            // Dodanie przedmiotów do pokoju z ustawieniami kolizji
             room.AddItem(new Bookshelf(1, 0) { IsCollidable = true });
             room.AddItem(new Desk(5, 1) { IsCollidable = true });
             room.AddItem(new Cobweb(9, 9) { IsCollidable = false });
@@ -39,6 +40,7 @@ namespace EscapeRoomWPF.Views
             UpdatePlayerStatus();
         }
 
+        // Renderowanie pokoju i pozycji gracza
         private void RenderRoom()
         {
             RoomCanvas.Children.Clear();
@@ -71,6 +73,7 @@ namespace EscapeRoomWPF.Views
             RoomCanvas.Children.Add(playerImage);
         }
 
+        // Aktualizacja listy ekwipunku
         private void UpdateInventoryList()
         {
             InventoryList.Items.Clear();
@@ -79,23 +82,26 @@ namespace EscapeRoomWPF.Views
                 InventoryList.Items.Add(item.Name);
             }
         }
+        // Aktualizacja statusu gracza
         private void UpdatePlayerStatus()
         {
             PlayerPositionText.Text = $"Pozycja: ({gameController.Player.PositionX}, {gameController.Player.PositionY})";
         }
 
+        // Pobranie przedmiotów w otoczeniu gracza
         private List<Item> GetNearbyItems()
         {
             int playerX = gameController.Player.PositionX;
             int playerY = gameController.Player.PositionY;
 
-            // Pobierz przedmioty w otoczeniu gracza
+            // Filtr przedmiotów w promieniu 1 kratki od gracza
             return gameController.GameMap.CurrentRoom.Items.Where(item =>
                 Math.Abs(item.PositionX - playerX) <= 1 &&
                 Math.Abs(item.PositionY - playerY) <= 1
             ).ToList();
         }
 
+        // Obsługa ruchu gracza za pomocą klawiszy strzałek
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (!IsEnabled) return; // Jeśli okno jest zablokowane, nic nie rób
@@ -119,6 +125,7 @@ namespace EscapeRoomWPF.Views
             UpdatePlayerStatus();
         }
 
+        // Obsługa kliknięcia na obszar mapy
         private void RoomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!IsEnabled) return; // Jeśli okno jest zablokowane, nic nie rób
@@ -148,8 +155,7 @@ namespace EscapeRoomWPF.Views
             }
         }
 
-
-
+        // Obsługa kliknięcia na przycisk interakcji
         private void OnInteractClick(object sender, RoutedEventArgs e)
         {
             var selectedInteraction = InteractionList.SelectedItem?.ToString();
@@ -206,6 +212,7 @@ namespace EscapeRoomWPF.Views
             }
         }
 
+        // Obsługa kliknięcia na przycisk interakcji z ekwipunku
         private void OnInventoryInteractClick(object sender, RoutedEventArgs e)
         {
             // Pobierz nazwę wybranego przedmiotu w ekwipunku
@@ -238,6 +245,7 @@ namespace EscapeRoomWPF.Views
             }
         }
 
+        // Obsługa kliknięcia na przycisk zapisu gry
         private void OnSaveGameClick(object sender, RoutedEventArgs e)
         {
             var gameState = new GameState
@@ -251,6 +259,8 @@ namespace EscapeRoomWPF.Views
             GameSaveLoad.SaveGame(gameState);
             MessageBox.Show("Gra została zapisana!");
         }
+
+        // Przywrócenie stanu gry
         public void RestoreGameState(GameState gameState)
         {
             gameController.Player.PositionX = gameState.PlayerPositionX;
@@ -287,6 +297,7 @@ namespace EscapeRoomWPF.Views
             UpdateInventoryList();
         }
 
+        // Obsługa zamykania aplikacji
         private void OnExitClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

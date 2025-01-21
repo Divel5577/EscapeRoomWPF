@@ -7,7 +7,7 @@ namespace EscapeRoomWPF.Models.Items
         public Key() : base() { }
 
         public Key(int positionX, int positionY)
-            : base("Klucz", "Mały mosiężny klucz. Może pasować do zamka.", true, positionX, positionY, "Assets/Images/key.png")
+            : base("Klucz", "Mały mosiężny klucz. Może pasować do zamka.", true, false, positionX, positionY, "Assets/Images/key.png")
         {
             InitializeInteractions();
         }

@@ -8,7 +8,7 @@ namespace EscapeRoomWPF.Models.Items
         public Bookshelf() : base() { }
 
         public Bookshelf(int positionX, int positionY)
-            : base("Półka", "Wygląda, jakby można ją było przesunąć.", false, positionX, positionY, "Assets/Images/bookshelf.png")
+            : base("Półka", "Wygląda, jakby można ją było przesunąć.", false, true, positionX, positionY, "Assets/Images/bookshelf.png")
         {
             IsMoved = false;
             InitializeInteractions();

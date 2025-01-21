@@ -11,6 +11,7 @@ namespace EscapeRoomWPF.Helpers
     {
         private const string SaveFilePath = "game_save.json";
 
+        // Zapis stanu gry do pliku
         public static void SaveGame(GameState gameState)
         {
             var options = new JsonSerializerOptions
@@ -22,6 +23,7 @@ namespace EscapeRoomWPF.Helpers
             File.WriteAllText(SaveFilePath, json);
         }
 
+        // Odczyt stanu gry z pliku
         public static GameState LoadGame()
         {
             if (!File.Exists(SaveFilePath))
@@ -43,9 +45,11 @@ namespace EscapeRoomWPF.Helpers
         {
             using (var doc = JsonDocument.ParseValue(ref reader))
             {
+                // Odczyt typu przedmiotu
                 var typeProperty = doc.RootElement.GetProperty("Type").GetString();
                 var json = doc.RootElement.GetRawText();
 
+                // Deserializacja na podstawie typu
                 Item item = typeProperty switch
                 {
                     "Door" => JsonSerializer.Deserialize<Door>(json, options),
@@ -80,11 +84,14 @@ namespace EscapeRoomWPF.Helpers
             }
         }
 
+        // Serializacja obiektu Item
         public override void Write(Utf8JsonWriter writer, Item value, JsonSerializerOptions options)
         {
+            // Serializacja obiektu do JSON
             var type = value.GetType().Name;
             var json = JsonSerializer.Serialize(value, value.GetType(), options);
 
+            // Zapis typu i właściwości do JSON
             using (var doc = JsonDocument.Parse(json))
             {
                 writer.WriteStartObject();

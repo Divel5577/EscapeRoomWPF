@@ -25,11 +25,12 @@ namespace EscapeRoomWPF.Models
         }
 
         // Konstruktor z parametrami
-        protected Item(string name, string description, bool isCollectible, int positionX, int positionY, string imagePath)
+        protected Item(string name, string description, bool isCollectible, bool isCollidable, int positionX, int positionY, string imagePath)
         {
             Name = name;
             Description = description;
             IsCollectible = isCollectible;
+            IsCollidable = isCollidable;
             PositionX = positionX;
             PositionY = positionY;
             ImagePath = imagePath;
