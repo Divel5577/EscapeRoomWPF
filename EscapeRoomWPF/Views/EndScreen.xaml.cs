@@ -42,30 +42,28 @@ namespace EscapeRoomWPF.Views
             }
         }
 
-
-
-
-
         private void OnShareToFriendClick(object sender, RoutedEventArgs e)
         {
-            // Treść wiadomości do udostępnienia
-            string message = $"Uciekłem z pokoju w grze EscapeRoomWPF w czasie: {ElapsedTimeText.Text.Replace("Twój czas gry: ", "")}! Spróbuj mnie pokonać! Link do gry: https://github.com/Divel5577/EscapeRoomWPF";
-
-            // URL do Messengera z możliwością wyboru znajomego
-            string messengerUrl = $"https://www.messenger.com/share?link={Uri.EscapeDataString("https://github.com/Divel5577/EscapeRoomWPF")}";
-
-            try
             {
-                // Otwórz URL w domyślnej przeglądarce
-                Process.Start(new ProcessStartInfo
+                // Treść wiadomości do udostępnienia
+                string message = $"Uciekłem z pokoju w grze EscapeRoomWPF w czasie: {ElapsedTimeText.Text.Replace("Twój czas gry: ", "")}! Spróbuj mnie pokonać! Link do gry: https://github.com/Divel5577/EscapeRoomWPF";
+
+                // URL do Messengera z zakodowaną wiadomością
+                string messengerUrl = $"https://www.messenger.com/t?text={Uri.EscapeDataString(message)}";
+
+                try
                 {
-                    FileName = messengerUrl,
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Nie udało się otworzyć Messengera: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    // Otwórz URL w domyślnej przeglądarce
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = messengerUrl,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Nie udało się otworzyć Messengera: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
