@@ -8,16 +8,25 @@ using System.Linq;
 using System.Windows.Controls;
 using System;
 using System.Collections.Generic;
+using System.Windows.Media;
+
 
 namespace EscapeRoomWPF.Views
 {
     public partial class MainWindow : Window
     {
         private GameController gameController;
+        private MediaPlayer clickSoundPlayer;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Inicjalizacja MediaPlayera dla dźwięku kliknięcia
+            clickSoundPlayer = new MediaPlayer();
+            clickSoundPlayer.Open(new Uri(@"C:\Visual Programy\EscapeRoomWPF\EscapeRoomWPF\Views\Assets\Sounds\click_sound.mp3", UriKind.Absolute));
+
+
 
             // Inicjalizacja gry
             var player = new Player(4, 5);
@@ -129,6 +138,10 @@ namespace EscapeRoomWPF.Views
         private void RoomCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!IsEnabled) return; // Jeśli okno jest zablokowane, nic nie rób
+
+            // Odtwarzanie dźwięku kliknięcia
+            clickSoundPlayer.Stop(); // Reset dźwięku w razie szybkich kliknięć
+            clickSoundPlayer.Play();
 
             var clickPosition = e.GetPosition(RoomCanvas);
 
